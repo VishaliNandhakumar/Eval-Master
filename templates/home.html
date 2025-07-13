@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to EvalMaster</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Georgia, serif; /* Updated to a Serif font */
+            background-color: #121212;
+            color: #e0e0e0;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('/static/images/front.webp');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            border-radius: 12px;
+            display: inline-block;
+            max-width: 80%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #ddd;
+        }
+
+        .get-started-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #B9D9EB; /* Updated button color */
+            color: #041E42; /* Updated font color */
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease-in-out;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .get-started-button:hover {
+            background-color: #A0C4D8; /* Slightly darker shade for hover effect */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to EvalMaster</h1>
+        <p>Your smart answer paper evaluation system.</p>
+        <a href="/login" class="get-started-button">Get Started...</a>
+    </div>
+</body>
+</html>

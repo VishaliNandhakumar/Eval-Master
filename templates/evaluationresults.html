@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/evalstyles.css') }}">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+       <!-- <button id="refreshButton" class="sidebar-btn">Refresh</button> -->
+        <a href="{{ url_for('logout') }}" class="sidebar-btn">Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Evaluation Results</h1>
+
+        <!-- Results Box -->
+        <div id="resultBox" class="result-box">
+            <h3>Evaluation Results:</h3>
+            <ul id="resultList">
+                <!-- Dynamic content will be injected here -->
+            </ul>
+        </div>
+
+        <button onclick="window.history.back()">Go Back</button>
+    </div>
+
+    <!-- JavaScript to Fetch and Display Results -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const resultList = document.getElementById("resultList");
+            const refreshButton = document.getElementById("refreshButton");
+
+            function fetchResults() {
+                fetch("/get_results")  // Fetch results from Flask API
+                    .then(response => response.json())
+                    .then(data => {
+                        resultList.innerHTML = ""; // Clear previous results
+
+                        if (data.error) {
+                            resultList.innerHTML = `<li class="error">${data.error}</li>`;
+                            return;
+                        }
+
+                        // Display each result dynamically
+                        for (const [key, value] of Object.entries(data)) {
+                            if (typeof value === 'number') {
+                                resultList.innerHTML += `
+                                    <li><strong>${key.replace(/_/g, ' ').toUpperCase()}:</strong> ${value.toFixed(2)}</li>
+                                `;
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error fetching results:", error);
+                        resultList.innerHTML = `<li class="error">Failed to load results. Please try again.</li>`;
+                    });
+            }
+
+            // Load results on page load
+            fetchResults();
+
+            // Refresh results on button click
+            //refreshButton.addEventListener("click", fetchResults);
+        });
+    </script>
+
+</body>
+
+</html>

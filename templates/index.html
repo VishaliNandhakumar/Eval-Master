@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EvalMaster</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button id="refreshButton" class="sidebar-btn" onclick="refresh()">Refresh</button>
+        <a href="{{ url_for('logout') }}" class="sidebar-btn">Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>EvalMaster</h1>
+
+        <!-- Toggle Switch for Dark Mode (Top Right) -->
+        <div class="toggle-container">
+            <label class="toggle-label">🌗</label>
+            <label class="toggle-switch">
+                <input type="checkbox" id="modeToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <!-- Evaluation Form -->
+        <form id="evaluationForm" action="{{ url_for('evaluate') }}" method="POST" enctype="multipart/form-data">
+            <label for="expected">Expected Answer (PDF Upload):</label>
+            <input type="file" id="expected_file" name="expected_file" accept=".pdf" required>
+
+            <label for="response">Student Answer (PDF Upload):</label>
+            <input type="file" id="student_file" name="student_file" accept=".pdf" required>
+
+            <button type="submit">Evaluate</button>
+        </form>
+
+        <!-- Loading Spinner -->
+        <div id="loading" style="display: none;">
+            <div class="spinner"></div>
+            Loading...
+        </div>
+
+        <!-- Result Box -->
+      <!--   <div id="result" class="result-box"></div> -->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = "true"; // Assuming you pass a variable 'is_logged_in' in your context
+            if (isLoggedIn === "true") {
+            const username = "{{ username }}"; // Assuming you have a username variable in your context
+            alert(`Logged in as ${username}`);
+            }
+        });
+        function refresh() {
+            location.reload(); // Reload the page to refresh the content
+        }
+    </script>
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+</body>
+
+</html>
